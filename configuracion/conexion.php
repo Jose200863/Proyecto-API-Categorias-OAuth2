@@ -7,7 +7,7 @@ function obtenerConexion(): PDO
         return $pdo;
     }
 
-    $datos = require __DIR__ . '/datos_conexion.php';
+    $datos = require __DIR__ . '/DatosConexion.php';
     $dsn = "mysql:host={$datos['host']};dbname={$datos['base']};charset={$datos['charset']}";
 
     try {

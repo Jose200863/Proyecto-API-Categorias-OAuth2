@@ -51,7 +51,6 @@ function autenticarCliente(PDO $pdo): array
             'error_description' => 'Solo se admite grant_type=client_credentials',
         ]);
     }
-.
     [$clientId, $clientSecret] = leerCredenciales();
     if ($clientId === null || $clientId === '' || $clientSecret === null || $clientSecret === '') {
         responderJson(400, [
