@@ -8,15 +8,20 @@ class ClienteRepositorio
 
     public function buscarPorClientId(string $clientId): ?array
     {
-        $sql = 'SELECT id, client_id, client_secret_hash, nombre, scopes, activo
-                FROM oauth_clients
-                WHERE client_id = :client_id
+
+        $sql = 'SELECT id,
+                       identificador AS client_id,
+                       secreto_hash  AS client_secret_hash,
+                       nombre,
+                       permisos      AS scopes,
+                       activo
+                FROM clientes_oauth
+                WHERE identificador = :identificador
                 LIMIT 1';
         $st = $this->pdo->prepare($sql);
-        $st->execute([':client_id' => $clientId]);
+        $st->execute([':identificador' => $clientId]);
         $fila = $st->fetch();
 
         return $fila ?: null;
     }
 }
-
