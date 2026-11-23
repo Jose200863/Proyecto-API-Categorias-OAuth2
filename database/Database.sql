@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Programadores (
     Contrasena VARCHAR(20) NOT NULL
 );
 
-INSERT INTO Programadores (Cedula, Nombre, Contrasena) VALUES
+INSERT IGNORE INTO Programadores (Cedula, Nombre, Contrasena) VALUES
     ('1', 'Luis', '01'),
     ('2', 'Ana', '02'),
     ('3', 'Maria', '03');
