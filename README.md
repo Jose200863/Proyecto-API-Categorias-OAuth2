@@ -89,11 +89,11 @@ Authorization: Bearer <access_token>
 
 | Operación | Método | URL | Cuerpo JSON | Permiso |
 |---|---|---|---|---|
-| Listar | `GET` | `/controlador/categoria.php` | - | `categorias:leer` |
-| Buscar | `GET` | `/controlador/categoria.php?codigo=1` | - | `categorias:leer` |
-| Agregar | `POST` | `/controlador/categoria.php` | `{"codigo": 5, "nombre": "Monitores"}` | `categorias:escribir` |
-| Actualizar | `PUT` | `/controlador/categoria.php` | `{"codigo": 5, "nombre": "Pantallas"}` | `categorias:escribir` |
-| Eliminar | `DELETE` | `/controlador/categoria.php` | `{"codigo": 5}` | `categorias:eliminar` |
+| Listar | `GET` | `/controlador/Categoria.php` | - | `categorias:leer` |
+| Buscar | `GET` | `/controlador/Categoria.php?codigo=1` | - | `categorias:leer` |
+| Agregar | `POST` | `/controlador/Categoria.php` | `{"codigo": 5, "nombre": "Monitores"}` | `categorias:escribir` |
+| Actualizar | `PUT` | `/controlador/Categoria.php` | `{"codigo": 5, "nombre": "Pantallas"}` | `categorias:escribir` |
+| Eliminar | `DELETE` | `/controlador/Categoria.php` | `{"codigo": 5}` | `categorias:eliminar` |
 
 ---
 
