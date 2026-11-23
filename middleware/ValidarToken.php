@@ -25,7 +25,12 @@ function obtenerTokenBearer(): ?string
 
 function rechazarToken(string $descripcion): void
 {
-    header('WWW-Authenticate: Bearer realm="API Categorias"');
+    $descripcionCabecera = addcslashes($descripcion, "\\\"");
+    header(
+        'WWW-Authenticate: Bearer realm="API Categorias", '
+        . 'error="invalid_token", '
+        . 'error_description="' . $descripcionCabecera . '"'
+    );
     responderJson(401, [
         'error'             => 'invalid_token',
         'error_description' => $descripcion,
@@ -61,7 +66,7 @@ function validarToken(PDO $pdo): array
         rechazarToken('Token vencido');
     }
 
-    $permisos = array_values(array_filter(explode(' ', $fila['permisos'])));
+    $permisos = preg_split('/\s+/', trim((string) $fila['permisos']), -1, PREG_SPLIT_NO_EMPTY);
 
     return [
         'id'     => (int) $fila['cliente_id'],
