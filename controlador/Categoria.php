@@ -6,6 +6,8 @@ require_once __DIR__ . '/../modelos/Categoria.php';
 require_once __DIR__ . '/../repositorios/CategoriaRepositorio.php';
 require_once __DIR__ . '/../configuracion/conexion.php';
 require_once __DIR__ . '/../middleware/ValidarToken.php';
+require_once __DIR__ . '/../middleware/Permisos.php';
+require_once __DIR__ . '/../middleware/RateLimit.php';
 
 $metodo = $_SERVER["REQUEST_METHOD"];
 
