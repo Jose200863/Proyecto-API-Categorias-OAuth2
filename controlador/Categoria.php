@@ -5,9 +5,7 @@ header("Content-Type: application/json; charset=utf-8");
 require_once __DIR__ . '/../modelos/Categoria.php';
 require_once __DIR__ . '/../repositorios/CategoriaRepositorio.php';
 require_once __DIR__ . '/../configuracion/conexion.php';
-require_once __DIR__ . '/../middleware/validar_token.php';
-require_once __DIR__ . '/../middleware/permisos.php';
-require_once __DIR__ . '/../middleware/rate_limit.php';
+require_once __DIR__ . '/../middleware/ValidarToken.php';
 
 $metodo = $_SERVER["REQUEST_METHOD"];
 

@@ -1,4 +1,4 @@
-configuracion/datos_conexion.php
+configuracion/DatosConexion.php
 
 *.log
 error_log
