@@ -17,3 +17,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.code-workspace
+
+# Configuración local de conexión (mantener fuera del repositorio)
+/configuracion/DatosConexion.php
