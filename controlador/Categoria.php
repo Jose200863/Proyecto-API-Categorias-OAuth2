@@ -4,27 +4,19 @@ header("Content-Type: application/json; charset=utf-8");
 
 require_once __DIR__ . '/../modelos/Categoria.php';
 require_once __DIR__ . '/../repositorios/CategoriaRepositorio.php';
-require_once __DIR__ . '/../repositorios/ProgramadorRepositorio.php';
+require_once __DIR__ . '/../configuracion/conexion.php';
+require_once __DIR__ . '/../middleware/validar_token.php';
+require_once __DIR__ . '/../middleware/permisos.php';
+require_once __DIR__ . '/../middleware/rate_limit.php';
 
 $metodo = $_SERVER["REQUEST_METHOD"];
 
 try {
 
-    $encabezados = getallheaders();
-
-    $cedula = $encabezados["X-Cedula"] ?? "";
-    $contrasena = $encabezados["X-Contrasena"] ?? "";
-
-    $repositorio = new ProgramadorRepositorio();
-
-    if (!$repositorio->validar($cedula, $contrasena)) {
-
-        http_response_code(401);
-
-        echo json_encode(["Error" => "Autorizacion Invalida"]);
-
-        exit;
-    }
+    $pdo = obtenerConexion();
+    $cliente = validarToken($pdo);
+    exigirPermiso($cliente['scopes'], $metodo);
+    verificarRateLimit($pdo, $cliente['id']);
 
     $repositorio = new CategoriaRepositorio();
 
@@ -33,7 +25,7 @@ try {
             $categoria = $repositorio->buscar($_GET["codigo"]);
 
             if ($categoria) {
-                echo json_encode($categoria); 
+                echo json_encode($categoria);
             } else {
                 http_response_code(404);
                 echo json_encode(["Error" => "Categoria no encontrada"]);
@@ -47,7 +39,6 @@ try {
 
         $body = json_decode(file_get_contents("php://input"), true);
 
-        // Comprobar que el JSON tenga codigo y nombre.
         if (!isset($body["codigo"]) || !isset($body["nombre"])) {
 
             http_response_code(400);
@@ -106,3 +97,4 @@ try {
     http_response_code(500);
     echo json_encode(["Error" => "Ocurrio un error al consultar MySQL"]);
 }
+
